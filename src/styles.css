@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/* 🌙 Base oscura y tokens de marca */
+@layer base {
+  :root {
+    --color-brand-500: #f05a3f;
+    --color-brand-600: #e14e33;
+
+    /* Fondo y tintes oscuros */
+    --bg-deep: #0d1117;
+    --bg-layer: #0f1319;
+    --bg-tint: #0e141b;
+
+    /* Texto suave */
+    --text-strong: #f3f4f6;
+    --text: #e5e7eb;
+    --text-muted: #cbd5e1;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family:
+      system-ui,
+      Inter,
+      Segoe UI,
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+}
+
+/* 🌞 Tema claro (pastel) */
+.light {
+  --bg-deep: #f8f8f6;
+  --bg-tint: #e6e6e2;
+  --text: #222222;
+  --text-muted: #555555;
+  --text-strong: #000000;
+}
+
+/* Títulos y tarjetas Octágono */
+.octa-title {
+  position: relative;
+  padding-left: 18px;
+}
+.octa-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 6px;
+  background: linear-gradient(180deg, var(--color-brand-500), var(--color-brand-600));
+  border-radius: 3px;
+}
+.octa-card {
+  background: color-mix(in oklab, var(--bg-layer) 92%, black 8%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.octa-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  border-color: color-mix(in oklab, var(--color-brand-500) 40%, white 60%);
+}
+p b {
+  color: var(--color-brand-500);
+  font-weight: 600;
+}
+/* 🌞 Ajustes para bloques glass en tema claro */
+.light .glass-text {
+  color: white !important;
+}
+
+.light .glass-text b {
+  color: var(--color-brand-500) !important;
+}
+/* Franja de lectura (glass): forzamos tokens solo dentro del bloque */
+.glass-text {
+  /* en dark el texto ya es claro, lo dejamos igual o un toque más claro */
+  --text: #e5e7eb; /* blanco suave */
+  --text-muted: #e5e7eb; /* para las notas en italic */
+  --text-strong: #ffffff;
+}
+
+.light .glass-text {
+  /* en light, adentro del glass queremos letras blancas */
+  --text: #ffffff;
+  --text-muted: #ffffff;
+  --text-strong: #ffffff;
+}
+
+/* mantenemos <b> en naranja dentro del glass */
+.glass-text b {
+  color: var(--color-brand-500);
+}
